@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color: beige;">
+
+<h2>Life Calendar</h2>
+
+<table id="lifeCalendar"></table>
+
+<script>
+function calculateWeeks(birthDate) {
+    const now = new Date();
+    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+    const weeks = Math.floor((now - birthDate) / oneWeek);
+    return weeks;
+}
+
+function generateCalendar(weeksPassed) {
+    let tableHTML = '';
+
+    for (let year = 0; year < 90; year++) {
+        tableHTML += '<tr>';
+        for (let week = 0; week < 52; week++) {
+            const weeksTotal = year * 52 + week;
+            const cellColor = weeksTotal <= weeksPassed ? 'gray' : 'white';
+            tableHTML += `<td style="background-color: ${cellColor}; width: 1px; height: 1px;"></td>`;
+        }
+        tableHTML += '</tr>';
+    }
+    return tableHTML;
+}
+
+const birthDate = new Date('2000-01-01'); // enter your birth date here
+const weeksPassed = calculateWeeks(birthDate);
+document.getElementById('lifeCalendar').innerHTML = generateCalendar(weeksPassed);
+</script>
+
+</body>
+</html>
